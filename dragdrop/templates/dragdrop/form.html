@@ -1,0 +1,19 @@
+{% extends "dragdrop/base.html" %}
+{% load staticfiles %}
+{% block content %}
+    <form method="POST" enctype="multipart/form-data">{% csrf_token %}
+        	<div id="upload" class="upload">{{ form.data }}</div>
+        	<div id='load'><img src="{% static 'dragdrop/css/images/loading-files.gif' %}">
+        		<div>
+        			<img id="logosource" style="display:none;" src="{% static "dragdrop/css/images/btnCreateSourceWS.png" %}" height="27" width="32">
+        			<img id="logosourcev" style="display:none;" src="{% static "dragdrop/css/images/btnCreateSource.png" %}" height="19" width="22">
+	       			<img id="logodataset" style="display:none;" src="{% static "dragdrop/css/images/btnCreateDatasetWS.png" %}" height="27" width="32">
+	       			<img id="logodatasetv" style="display:none;" src="{% static "dragdrop/css/images/btnCreateDataset.png" %}" height="19" width="22">
+	       			<img id="logomodel" style="display:none;" src="{% static "dragdrop/css/images/btnCreateModelWS.png" %}" height="27" width="32">
+	       			<img id="logomodelv" style="display:none;" src="{% static "dragdrop/css/images/btnCreateModel.png" %}" height="19" width="22">
+        			<span id="progress"></span>
+        		</div>
+        	</div>
+    		<p id='error'></p>
+    </form>
+{% endblock content %}

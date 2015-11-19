@@ -1,0 +1,74 @@
+{% extends "dragdrop/base2.html" %}
+{% block content %}
+{% load staticfiles %}
+	<div class="row">  
+		 <div class="col-sm-2 col-centered">
+		 	<div style="float:left;"><div class="border_radius_left"><div id="url_file">{{ file.url }}</div>
+		 		<a style="cursor:pointer;" data-toggle="popover" data-placement="bottom" data-content='<a class="delete" style="text-decoration:none; cursor:pointer; color:red;" onClick="ajaxDelete_detail({{ file.pk }})"><span title="Delete source" class="glyphicon glyphicon-trash"></span> Delete</a>'>
+		 			<img src="{% static 'dragdrop/css/images/btnDisplayProjectList.png' %}" >
+		 		</a>
+		 	</div><img style="margin-left: 3px;" id="load_del" src="{% static 'dragdrop/css/images/loading-delete.gif' %}"></div>
+			<table id='sources' class="table table-striped" style="margin-bottom:0px;">
+			 <thead>
+			   	<tr>
+			      <th></th>
+			      <th><img src="{% static 'dragdrop/css/images/btnCreateSourceWS.png' %}" height='22' width='25'> Sources</th>
+			      <th><span class="glyphicon glyphicon-calendar"></span> Age</th>
+			    </tr>
+			  </thead>
+			  <tbody>
+			  {% for file in data %}
+			  	<tr id="{{ file.pk }}">
+			      <td><img src="{% static 'dragdrop/css/images/btnCreateSource.png' %}" height='18' width='18'></td>
+			      <td><a href="{% url "dragdrop.views.data_detail" pk=file.pk %}">{{ file.url }}</a></h1></td>
+			      <td>{{ file.age }}</td>
+			    </tr>
+			  {% endfor %}
+			  </tbody>
+			</table>
+			<div class="pagination" style="margin-top:0px;">
+   				<span class="step-links">
+       				{% if data.has_previous %}
+           				<a href="?page={{ data.previous_page_number }}" style="text-decoration:none;">
+           					<img src="{% static 'dragdrop/css/images/btnDismissProjectList.png' %}">
+           				</a>
+      					{% endif %}
+
+       				<span class="current">
+           				Page {{ data.number }} of {{ data.paginator.num_pages }}
+       				</span>
+
+       				{% if data.has_next %}
+           				<a href="?page={{ data.next_page_number }}" style="text-decoration:none;"> 
+           					<img src="{% static 'dragdrop/css/images/btnDisplayProjectList.png' %}" >
+           				</a>
+       				{% endif %}
+   				</span>
+			</div>
+		 </div>
+		 <div class="col-sm-10 col-centered">
+			<ul class="nav nav-tabs">
+			    <li class="active">
+			    	<a data-toggle="tab" href="#home">
+			    		<img style="margin-right:3px;" src="{% static 'dragdrop/css/images/btnCreateDataset.png' %}" height='18' width='18'>
+			    		Dataset
+			    	</a>
+			    </li>
+			    <li>
+			    	<a data-toggle="tab" href="#menu1">
+			    		<img style="margin-right:3px;" src="{% static 'dragdrop/css/images/btnCreateModel.png' %}" height='18' width='18'>
+			    		Model
+			    	</a>
+			    </li>
+			</ul>
+			<div class="tab-content">
+		 		<div id="home" class="tab-pane fade in active">
+				    <iframe src="https://bigml.com/dashboard/{{ file.dataset_url }}#dataset_wrapper" style="border:none"></iframe>
+			  	</div>
+				<div id="menu1" class="tab-pane fade">
+					<iframe src="https://bigml.com/dashboard/{{ file.model_url }}#model_wrapper" style="border:none"></iframe>
+				</div>
+			</div>
+		 </div>
+	</div>
+{% endblock content %}

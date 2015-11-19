@@ -1,0 +1,47 @@
+Metadata-Version: 1.1
+Name: dragdrop
+Version: 0.1
+Summary: A simple Django app to drag and drop BigML files.
+Home-page: http://www.example.com/
+Author: Felix Martin
+Author-email: yourname@example.com
+License: LICENSE
+Description: =================
+        BigML Drag & Drop
+        =================
+        
+        Drag and Drop your CSV files to make predictions with BigML.
+        
+        Quick start
+        -----------
+        
+        1. Add "dragdrop" to your INSTALLED_APPS setting like this::
+        
+            INSTALLED_APPS = (
+                ...
+                'dragdrop',
+            )
+        
+        2. Include the dragdrop URLconf in your project urls.py like this::
+        
+            url(r'', include('dragdrop.urls')),
+        
+        3. Run `python manage.py migrate` to create the dragdrop models.
+        
+        4. Start the development server and visit http://127.0.0.1:8000/admin/
+           to create a BigML file (you'll need the Admin app enabled).
+        
+        5. Visit http://127.0.0.1:8000/ to drag and drop your first CSV file.
+Platform: UNKNOWN
+Classifier: Environment :: Web Environment
+Classifier: Framework :: Django
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: LICENSE
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.2
+Classifier: Programming Language :: Python :: 3.3
+Classifier: Topic :: Internet :: WWW/HTTP
+Classifier: Topic :: Internet :: WWW/HTTP :: Dynamic Content

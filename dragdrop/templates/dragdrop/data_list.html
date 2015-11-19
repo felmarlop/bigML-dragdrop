@@ -1,0 +1,51 @@
+{% extends "dragdrop/base2.html" %}
+{% block content %}
+{% load staticfiles %}
+	<div>
+        <h1><a id="prueba" href="/files" style="text-decoration: none; color:#749201">bigML Sources</a>
+        <img id="load_del" src="{% static 'dragdrop/css/images/loading-delete.gif' %}"></h1>
+    </div>
+    <div class="container">
+   		<div class="col-sm-12">	
+		    <table class="table table-striped" style="margin-bottom:0px;">
+				 <thead>
+				   	<tr>
+				      <th></th>
+				      <th><img src="{% static 'dragdrop/css/images/btnCreateSourceWS.png' %}" height='22' width='25'> Sources</th>
+				      <th><span class="glyphicon glyphicon-calendar"></span> Age</th>
+				      <th></th>
+				    </tr>
+				  </thead>
+				  <tbody>
+				  {% for file in data %}
+				  	<tr id="{{ file.pk }}">
+				      <td><img src="{% static 'dragdrop/css/images/btnCreateSource.png' %}" height='18' width='18'></td>
+				      <td style="text-align:left;"><a href="{% url "dragdrop.views.data_detail" pk=file.pk %}">{{ file.url }}</a></h1></td>
+				      <td style="text-align:left;">{{ file.age }}</td>
+				      <td><a style=" cursor:pointer;" onClick="ajaxDelete({{ file.pk }})"><span title="Delete source" class="glyphicon glyphicon-trash" style="color:red;"></span></a></td>
+				    </tr>
+				  {% endfor %}
+				  </tbody>
+			</table>
+			<div class="pagination" style="margin-top:0px; width:100%;">
+   				<span class="step-links">
+       				{% if data.has_previous %}
+           				<a href="?page={{ data.previous_page_number }}" style="text-decoration:none;">
+           					<img src="{% static 'dragdrop/css/images/btnDismissProjectList.png' %}">
+           				</a>
+      					{% endif %}
+
+       				<span class="current">
+           				Page {{ data.number }} of {{ data.paginator.num_pages }}
+       				</span>
+
+       				{% if data.has_next %}
+           				<a href="?page={{ data.next_page_number }}" style="text-decoration:none;"> 
+           					<img src="{% static 'dragdrop/css/images/btnDisplayProjectList.png' %}" >
+           				</a>
+       				{% endif %}
+   				</span>
+			</div>
+		</div>
+	</div>
+{% endblock content %}
