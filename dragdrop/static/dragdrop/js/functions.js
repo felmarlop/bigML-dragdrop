@@ -19,13 +19,14 @@ $(document).ready(function(){
 	    progressall: function (e, data, status) {
 	    	var progressP = parseInt(data.loaded / data.total * 100, 10);
 	    	$('#progress').append('<span class="upl">'+progressP+'% uploaded.</span>');
-	    	check_states();
 	    	document.getElementById('fileid').style.display= 'none';
 	        document.getElementById('upload').style.opacity = '0.8';
 	        document.getElementById('load').style.display = 'block';
+	        check_states();
 	    },
 	    complete: function(xhr){
 	    	if(xhr.status != 200){
+	    		check_states().abort();
 	    		$('#error').html('');
 	    		document.getElementById('fileid').style.display= 'block';
 		        document.getElementById('upload').style.opacity = '1';
