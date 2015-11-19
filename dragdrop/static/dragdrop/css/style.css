@@ -105,8 +105,10 @@ table thead{
 	display: inline-block;
 	background-color:red;
 	border: ridge;
+	border-size:thin;
 	border-radius: 5px 5px 5px 5px;
 	color:white;
+	margin:5px;
 }
 
 .table{

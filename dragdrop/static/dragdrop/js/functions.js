@@ -24,28 +24,15 @@ $(document).ready(function(){
 	        document.getElementById('load').style.display = 'block';
 	        check_states();
 	    },
-	    complete: function(xhr){
-	    	if(xhr.status != 200){
-	    		check_states().abort();
-	    		$('#error').html('');
-	    		document.getElementById('fileid').style.display= 'block';
-		        document.getElementById('upload').style.opacity = '1';
-		        document.getElementById('load').style.display = 'none';
-		        $('#error').addClass('error');
-	    		if(xhr.status == 201){
-	    			$('#error').append('File not allowed');
-	    		}else{
-			        $('#error').append('Server error code: '+xhr.status);
-	    		}
-	    	}
-	    },
 	    success: function(data) {
 	    	document.getElementById("upload").className = "upload";
 	    	window.location.href=this.url+'file/'+data['pk'];
         },
         error : function(xhr,errmsg,err) {
+        	$('#error').addClass('error');
+        	document.getElementById('load').style.display = 'none';
             $('#error').html("Oops! We have encountered an error: "+errmsg+
-                " <a href='#' class='close'>&times;</a>"); // add the error to the dom
+                "<a href='/' style='margin-left:5px;' class='close'>&times;</a>"); // add the error to the dom
             console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
         }
     });
