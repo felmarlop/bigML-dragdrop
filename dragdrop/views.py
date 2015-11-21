@@ -7,36 +7,38 @@ from .Util import ESTADOS
 import os
 
 
-# Create your views here.
-
+# Create your views here
 def data_detail(request, pk):
-    files = get_object_or_404(Bigml_File, pk=pk)
-    data_set = Bigml_File.objects.all().order_by('-published_date')
-    paginator = Paginator(data_set, 10)
-    
-    page = request.GET.get('page')
     try:
-        data = paginator.page(page)
-    except PageNotAnInteger:
-        data = paginator.page(1)
-    except EmptyPage:
-        data = paginator.page(paginator.num_pages)
-    return render(request, 'dragdrop/data_detail.html', {'file': files, 'data': data})
+        files = get_object_or_404(Bigml_File, pk=pk)
+        data_set = Bigml_File.objects.all().order_by('-published_date')
+        paginator = Paginator(data_set, 10)
+        
+        page = request.GET.get('page')
+        try:
+            data = paginator.page(page)
+        except PageNotAnInteger:
+            data = paginator.page(1)
+        except EmptyPage:
+            data = paginator.page(paginator.num_pages)
+        return render(request, 'dragdrop/data_detail.html', {'file': files, 'data': data})
+    except:
+        return render(request, 'dragdrop/error.html', {'pk': pk})
 
 def delete_file(request, pk):
     try:
-        file = get_object_or_404(Bigml_File, pk=pk)
-        file.delete_ml()
-        file.delete()
+        files = get_object_or_404(Bigml_File, pk=pk)
+        files.delete_ml()
+        files.delete()
         data = 'True'
     except:
         data = 'False'
     return JsonResponse({'success':data})
 
 def delete_file_detail(request, pk):
-    file = get_object_or_404(Bigml_File, pk=pk)
-    file.delete_ml()
-    file.delete()
+    files = get_object_or_404(Bigml_File, pk=pk)
+    files.delete_ml()
+    files.delete()
     return data_list(request)
 
 
@@ -66,10 +68,17 @@ def new_file(request):
                 files.author = request.user
                 files.url = files.data.url
                 files.save()
-                files.modify(files.pk)
-                return JsonResponse({'pk': files.pk})
+                try:
+                    files.modify(files.pk)
+                    return JsonResponse({'pk': files.pk})
+                except:
+                    ESTADOS[0] = 'none'
+                    os.remove('uploads/'+files.url)
+                    return HttpResponse(status=500)
             else:
-                return HttpResponse(status=201)
+                ESTADOS[0] = 'none'
+                os.remove('uploads/'+files.url)
+                return HttpResponse(status=500)
     else:
         form = BigmlForm()
     return render(request, 'dragdrop/form.html', {'form': form})

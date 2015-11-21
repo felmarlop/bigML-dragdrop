@@ -26,6 +26,11 @@
 		        if(result['success'] == "True"){
 		        	document.getElementById('load_del').style.display = 'none';
 		        	document.getElementById(pk).remove();
+		        }else{
+		        	$('#error').addClass('error');
+		        	document.getElementById('load_del').style.display = 'none';
+		            $('#error').html("Oops! We have encountered an error in Delete"+
+		                "<a href='/files' style='margin-left:5px;' class='close'>&times;</a>"); // add the error to the dom
 		        }
 		    }});
 		}

@@ -29,7 +29,9 @@ $(document).ready(function(){
 	    	window.location.href=this.url+'file/'+data['pk'];
         },
         error : function(xhr,errmsg,err) {
+        	check_states();
         	$('#error').addClass('error');
+        	document.getElementById("bsources").style.display = 'block';
         	document.getElementById('load').style.display = 'none';
             $('#error').html("Oops! We have encountered an error: "+errmsg+
                 "<a href='/' style='margin-left:5px;' class='close'>&times;</a>"); // add the error to the dom
@@ -44,13 +46,15 @@ function check_states(){
         if (result['state_source'] == 'false'){
         	document.getElementById('logosource').style.display = 'inline';
         	$('.upl').replaceWith('<span class="upl"> Building your source</span>');
-        	setTimeout(check_states(), 900);
+        	setTimeout(check_states(), 3000);
+        }else if(result['state_source'] == 'none'){
+        	return;
         }else if(result['state_dataset'] == 'false'){
         	document.getElementById('logosource').style.display = 'none';
         	document.getElementById('logodataset').style.display = 'inline';
         	document.getElementById('logosourcev').style.display = 'inline';
         	$('.upl').replaceWith('<span class="upl"> Building your dataset</span>');
-        	setTimeout(check_states(), 900);
+        	setTimeout(check_states(), 3000);
         }else if(result['state_model'] == 'false'){
         	document.getElementById('logosource').style.display = 'none';
         	document.getElementById('logodataset').style.display = 'none';
@@ -58,7 +62,7 @@ function check_states(){
         	document.getElementById('logosourcev').style.display = 'inline';
         	document.getElementById('logodatasetv').style.display = 'inline';
         	$('.upl').replaceWith('<span class="upl"> Building your model</span>');
-        	setTimeout(check_states(), 900);
+        	setTimeout(check_states(), 3000);
         }else{
         	document.getElementById('logosource').style.display = 'none';
         	document.getElementById('logodataset').style.display = 'none';

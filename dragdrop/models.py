@@ -1,11 +1,9 @@
 from django.db import models
 from django.utils import timezone
-import datetime
 from django.shortcuts import get_object_or_404
 from .Util import create_dataset,create_model, create_source
 from dragdrop.Util import delete_file
-from django.http import JsonResponse
-from django.http.response import HttpResponse
+import os
 
 
 # Create your models here.
@@ -22,6 +20,7 @@ class Bigml_File(models.Model):
     
     def modify(self, pk):
         files = get_object_or_404(Bigml_File, pk=pk)
+        
         #Making the source
         source = create_source('uploads/'+files.url)
         #Making the dataset
@@ -33,6 +32,7 @@ class Bigml_File(models.Model):
         files.dataset_url = dataset['resource']
         files.model_url = model['resource']
         files.published_date = timezone.now()
+        os.remove('uploads/'+files.url)
         files.save()
         
     
