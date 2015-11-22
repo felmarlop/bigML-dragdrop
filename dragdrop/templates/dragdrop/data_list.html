@@ -2,8 +2,7 @@
 {% block content %}
 {% load staticfiles %}
 	<div>
-        <h1><a id="prueba" href="/files" style="text-decoration: none; color:#749201">bigML Sources</a>
-        <img id="load_del" src="{% static 'dragdrop/css/images/loading-delete.gif' %}"></h1>
+        <h1><a id="prueba" href="/files" style="text-decoration: none; color:#749201">bigML Files</a>
     </div>
     <div class="container">
    		<div class="col-sm-12">	
@@ -18,11 +17,32 @@
 				  </thead>
 				  <tbody>
 				  {% for file in data %}
+				  <div id="modal{{ file.pk }}" class="modal fade" role="dialog">
+						  <div class="modal-dialog">
+						    <!-- Modal content-->
+						    <div class="modal-content">
+						      <div class="modal-header">
+						        <button type="button" class="close" onClick="cancelDelete()" data-dismiss="modal">&times;</button>
+						        <h4 id="modal-title" class="modal-title">Delete {{ file.url }}?</h4>
+						      </div>
+						      <div class="modal-footer" style="text-align:center;">
+						        <button type="button" class="btn btn-success" onClick="cancelDelete()" data-dismiss="modal">Cancel</button>
+						        <button type="button" class="btn btn-danger" onClick="ajaxDelete({{ file.pk }})"><img id="load{{ file.pk }}" style="display:none;" src="{% static 'dragdrop/css/images/loading-white.gif' %}"> Accept</button>
+						      </div>
+						    </div>
+						
+						  </div>
+					</div>
 				  	<tr id="{{ file.pk }}">
 				      <td><img src="{% static 'dragdrop/css/images/btnCreateSource.png' %}" height='18' width='18'></td>
 				      <td style="text-align:left;"><a href="{% url "dragdrop.views.data_detail" pk=file.pk %}">{{ file.url }}</a></h1></td>
 				      <td style="text-align:left;">{{ file.age }}</td>
-				      <td><a style=" cursor:pointer;" onClick="ajaxDelete({{ file.pk }})"><span title="Delete source" class="glyphicon glyphicon-trash" style="color:red;"></span></a></td>
+				      <td><a style="cursor:pointer;" data-toggle="popover" data-placement="bottom" data-content='
+				      			<a href="/file/{{ file.pk }}" class="btn btn-success btn-md">Show</a>
+				      			<button type="button" class="btn btn-danger btn-md" data-toggle="modal" data-target="#modal{{ file.pk }}">Delete</button>'>
+		 			  		<img src="{% static 'dragdrop/css/images/btnDisplayProjectList.png' %}" >
+		 			    </a>
+		 			 </td>
 				    </tr>
 				  {% endfor %}
 				  </tbody>

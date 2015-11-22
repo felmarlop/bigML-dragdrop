@@ -13,22 +13,20 @@
   <link rel="stylesheet" type="text/css" href="{% static 'dragdrop/css/style.css' %}" />
   <script>
 		$(document).ready(function(){
-			//Disable loading
-			document.getElementById('load_del').style.display = 'none';
 			
 			//Function popover
     		$('[data-toggle="popover"]').popover({html:true});
 		});
 		//Able loading and delete objects
 		function ajaxDelete(pk){
-			document.getElementById('load_del').style.display = 'inline';
+			document.getElementById('load'+pk).style.display = 'inline';
 			$.ajax({url: "/delete_file/"+pk, success: function(result){
 		        if(result['success'] == "True"){
-		        	document.getElementById('load_del').style.display = 'none';
 		        	document.getElementById(pk).remove();
+		        	$('#modal'+pk).modal('hide');
 		        }else{
+		        	$('#modal'+pk).modal('hide');
 		        	$('#error').addClass('error');
-		        	document.getElementById('load_del').style.display = 'none';
 		            $('#error').html("Oops! We have encountered an error in Delete"+
 		                "<a href='/files' style='margin-left:5px;' class='close'>&times;</a>"); // add the error to the dom
 		        }
@@ -36,7 +34,6 @@
 		}
 		
 		function ajaxDelete_detail(pk){
-			$('[data-toggle="popover"]').popover('hide');
 			document.getElementById('load_del').style.display = 'inline';
 			$.ajax({url: "/delete_file/"+pk, success: function(result){
 		        if(result['success'] == "True"){
@@ -45,6 +42,16 @@
 		        	window.location.href='/files';
 		        }
 		    }});
+		}
+		
+		function fillModal(data){
+			alert('hol');
+			//document.getElementById('button-accept').onclick = ajaxDelete(pk);
+			//$("#myModal").modal('show');
+		}
+		
+		function cancelDelete(){
+			$('[data-toggle="popover"]').popover('hide');
 		}
 	</script>
    
@@ -66,12 +73,13 @@
       height: 100%;
   }
   .bg-2 { 
-  	  position:absolute;
-      background-color: #172D40;
+  	  background-color: #172D40;
       color: #ffffff;
       width:100%;
       height:100%;
-      padding-bottom: 70px;
+      position: fixed;
+      top: 87%;
+      width:100%;
   }
   </style>
 </head>
