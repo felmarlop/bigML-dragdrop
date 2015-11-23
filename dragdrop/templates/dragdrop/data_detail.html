@@ -4,7 +4,7 @@
 	<div class="row">  
 		 <div class="col-sm-2 col-centered">
 		 	<div style="float:left;"><div class="border_radius_left"><div id="url_file">{{ file.url }}</div>
-		 		<a style="cursor:pointer;" data-toggle="popover" data-placement="bottom" data-content='<button type="button" class="btn btn-danger btn-md" data-toggle="modal" data-target="#myModal">Delete</button>'>
+		 		<a style="cursor:pointer;" data-toggle="popover" data-placement="right" data-content='<button type="button" onClick="cancelDelete()" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#myModal">Delete</button>'>
 		 			<img src="{% static 'dragdrop/css/images/btnDisplayProjectList.png' %}" >
 		 		</a>
 		 	</div></div>
@@ -81,7 +81,7 @@
 			        <h4 class="modal-title">Delete {{ file.url }}?</h4>
 			      </div>
 			      <div class="modal-footer" style="text-align:center;">
-			        <button type="button" class="btn btn-success" onClick="cancelDelete()" data-dismiss="modal">Cancel</button>
+			        <button type="button" class="btn btn-success" data-dismiss="modal">Cancel</button>
 			        <button type="button" class="btn btn-danger" onClick="ajaxDelete_detail({{ file.pk }})"><img id="load_del" style="display:none;" src="{% static 'dragdrop/css/images/loading-white.gif' %}"> Accept</button>
 			      </div>
 			    </div>

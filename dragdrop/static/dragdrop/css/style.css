@@ -11,8 +11,29 @@ iframe{
 	height:700px;
 	
 }
+table{
+	border:ridge;
+	border-width:2px;;
+	padding:0px;
+	width: inline-block;
+	min-width:300px; 
+	max-width: 500px;
+	margin-top:3px;
+}
 table thead{
 	background-color:#EAEFF3;
+}
+
+.popover{
+	max-width: 100%;
+	background: #EAEFF3;
+}
+.popover.right .arrow:after {
+    border-right-color: #EAEFF3;
+}
+.popover-content{
+	padding-top:2px;
+	padding-bottom:2px;
 }
 
 #fileid{
@@ -54,14 +75,7 @@ table thead{
 	height: 400px;
 	padding:40px;
 }
-#sources{
-	border:ridge;
-	padding:0px;
-	width: inline-block;
-	min-width:300px; 
-	max-width: 500px;
-	margin-top:3px;​
-}
+
 #url_file{
 	border:outset;
 	padding:4px;
