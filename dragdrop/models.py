@@ -51,6 +51,8 @@ class Bigml_File(models.Model):
         else:
             if days < 30:
                 res = str(days)+' d'
+            elif days < 7:
+                res = str(days/7)+' w &'+str(days%7)+' d'
             elif days < 365:
                 res = str(days/30)+' m'
             else:

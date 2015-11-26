@@ -33,7 +33,7 @@ $(document).ready(function(){
         	$('#error').addClass('error');
         	document.getElementById("bsources").style.display = 'block';
         	document.getElementById('load').style.display = 'none';
-            $('#error').html("Oops! We have encountered an error: "+errmsg+
+            $('#error').html("Oops! We have encountered an error: "+err+
                 "<a href='/' style='margin-left:5px;' class='close'>&times;</a>"); // add the error to the dom
             console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
         }

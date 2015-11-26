@@ -5,14 +5,15 @@ Created on 4 de nov. de 2015
 '''
 from bigml.api import BigML
 
-api = BigML('felmarlop', '0b4b8f7e1c73500796bc00b974518b571abf752f')
+api = BigML('', '')
+
 
 #Lista de estados de los recursos
 ESTADOS= [None] * 3
 
 def create_source(url):
     source = api.create_source(url, {'name': url, 'project': 
-                                   'project/5639eca51d5505456b000a1a', 
+                                   'your_bigml_project_url',
                                    'source_parser': {'missing_tokens': ['?']}})
     ESTADOS[0] = 'true'
     return source

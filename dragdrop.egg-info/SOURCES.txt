@@ -1,6 +1,7 @@
 LICENSE
 MANIFEST.in
 README.rst
+setup.cfg
 setup.py
 dragdrop/Util.py
 dragdrop/__init__.py
@@ -28,6 +29,7 @@ dragdrop/static/dragdrop/css/images/btnDisplayProjectList.png
 dragdrop/static/dragdrop/css/images/icon_16x16.png
 dragdrop/static/dragdrop/css/images/loading-delete.gif
 dragdrop/static/dragdrop/css/images/loading-files.gif
+dragdrop/static/dragdrop/css/images/loading-white.gif
 dragdrop/static/dragdrop/css/images/resource_list_bar_buttons.png
 dragdrop/static/dragdrop/css/images/white_box_logo.jpg
 dragdrop/static/dragdrop/css/images/white_box_open_logo.jpg
@@ -40,4 +42,5 @@ dragdrop/templates/dragdrop/base.html
 dragdrop/templates/dragdrop/base2.html
 dragdrop/templates/dragdrop/data_detail.html
 dragdrop/templates/dragdrop/data_list.html
+dragdrop/templates/dragdrop/error.html
 dragdrop/templates/dragdrop/form.html

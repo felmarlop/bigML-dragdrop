@@ -74,10 +74,12 @@ def new_file(request):
                 except:
                     ESTADOS[0] = 'none'
                     os.remove('uploads/'+files.url)
+                    files.delete()
                     return HttpResponse(status=500)
             else:
                 ESTADOS[0] = 'none'
                 os.remove('uploads/'+files.url)
+                files.delete()
                 return HttpResponse(status=500)
     else:
         form = BigmlForm()
